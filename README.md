@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# harema
 
-## Getting Started
+Webコーダー川﨑 陽香のポートフォリオサイトです。
 
-First, run the development server:
+これまでの制作事例やスキルセット、実装時のこだわりを盛り込んで制作しました。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**本番環境URL：** [https://pf.halllll.com](https://pf.halllll.com)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+※デプロイプラットフォーム: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💻 技術スタック
 
-## Learn More
+ログイン画面の設置や快適な閲覧環境を目指したヘッドレスCMSの導入など、習得中のモダンな技術を実践しました。
 
-To learn more about Next.js, take a look at the following resources:
+| カテゴリ | 使用技術・ツール |
+| :--- | :--- |
+| **フロントエンド** | Next.js, JavaScript |
+| **ヘッドレスCMS** | microCMS (実績管理) |
+| **デザイン再現** | Tailwind CSS, SCSS |
+| **インフラ / デプロイ** | Vercel |
+| **コード管理** | GitHub |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ 主要な機能
 
-## Deploy on Vercel
+* microCMS APIを用いた実績・投稿データの動的非同期フェッチ
+* JSONデータ切り替えによる多言語対応
+* コンポーネント切り替えによる実績一覧の表示ロジック
+* 完全レスポンシブ対応（PC / タブレット / スマホ）
+* 限定公開によるセキュリティ対策（ロボット巡回拒否・メールアドレス難読化）
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 ディレクトリ構造（主要部分）
+
+```text
+src/
+├── app/
+│   ├── (auth)/           # 認証・管理関連
+│   ├── en/               # 英語版ルーティング層
+│   ├── works/            # 実績関連ページ（動的ルート [id] 含む）
+│   ├── profile/          # プロフィールページ
+│   ├── i18n/             # 多言語管理用JSONフォルダ
+│   ├── layout.tsx        # 共通レイアウト（メタデータ・noindex共通設定）
+│   └── page.tsx          # トップページ
+└── components/           # UIコンポーネント
+    ├── common/           # ヘッダーやフッター等の共通パーツ
+    ├── features/         # 実績リスト等の機能特化コンポーネント
+    └── ui/               # ボタンや共通コンテナ等のUIコンポーネント
