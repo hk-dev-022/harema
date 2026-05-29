@@ -1,0 +1,25 @@
+.richContent {
+	> *+* {
+		margin-top: 2px;
+	}
+
+	> * {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	p {
+		word-break: break-all;
+		margin-bottom: 1.75rem;
+	}
+
+	figure {
+		border: 4px solid #000;
+		border-radius: 2px;
+		@media (min-width: 640px) {
+			border-width: 8px;
+			border-radius: 6px;
+		}
+	}
+}
