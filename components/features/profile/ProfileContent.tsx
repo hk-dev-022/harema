@@ -27,7 +27,7 @@ export default function ProfileContent({ dict, isEn = false }: Props) {
 				<div className='w-full sm:max-w-[300px] sm:mr-10 sm:relative'>
 					<div className='sm:sticky sm:top-[120px] xl:top-[150px]'>
 						<div className='aspect-[2/1] w-full relative sm:aspect-[1/1] sm:max-w-[200px]'>
-							<Image 
+							<Image
 								src="/img/profile_cover.jpg"
 								alt="Portrait"
 								fill
@@ -40,7 +40,7 @@ export default function ProfileContent({ dict, isEn = false }: Props) {
 							<span className='text-body-sm'>Haruka&nbsp;Kawasaki</span>
 							<span className='text-body-sm mt-2'>{dict.role}</span>
 						</h2>
-					<p className={`whitespace-pre-wrap text-body-base mt-6 leading-[1.8] ${isEn ? 'text-left' : ''}`}>{dict.body}</p>
+						<p className={`whitespace-pre-wrap text-body-base mt-6 leading-[1.8] ${isEn ? 'text-left' : ''}`}>{dict.body}</p>
 					</div>
 				</div>
 				<section className='mt-10 sm:w-[60%] sm:mt-0'>
@@ -50,11 +50,11 @@ export default function ProfileContent({ dict, isEn = false }: Props) {
 							Skills
 						</Heading>
 						<dl className='text-body-base leading-[1.6] text-left mt-2'>
-							<dt className='font-bold'>★★★<br/>HTML5 / CSS / SCSS / PRECSS / BEM / jQuery</dt>
+							<dt className='font-bold'>★★★<br />HTML5 / CSS / SCSS / PRECSS / BEM / jQuery</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.skill_dd_high}</dd>
-							<dt className='font-bold mt-6'>★★<br/>Pug / JavaScript / PHP / Liquid / Git / Github</dt>
+							<dt className='font-bold mt-6'>★★<br />Pug / JavaScript / PHP / Liquid / Git / Github</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.skill_dd_mid}</dd>
-							<dt className='font-bold mt-6'>★<br/>Tailwind CSS / Next.js + JSX / React / Vue.js</dt>
+							<dt className='font-bold mt-6'>★<br />Tailwind CSS / Next.js / React / Vue.js</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.skill_dd_low}</dd>
 						</dl>
 					</section>
@@ -63,11 +63,11 @@ export default function ProfileContent({ dict, isEn = false }: Props) {
 							Tools
 						</Heading>
 						<dl className='text-body-base leading-[1.6] text-left mt-2'>
-							<dt className='font-bold'>★★★<br/>Figma / Xd / Illustrator / Photoshop / Wordpress / Windsurf / Cursor / Visual Studio Code / Local / Slack / Messenger / Zoom / Meet</dt>
+							<dt className='font-bold'>★★★<br />Figma / Xd / Illustrator / Photoshop / Wordpress / Windsurf / Cursor / Visual Studio Code / Local / Slack / Messenger / Zoom / Meet</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.tool_dd_high}</dd>
-							<dt className='font-bold mt-6'>★★<br/>Shopify / STUDIO / BASE / Google Search Console / Google Analytics / Chatwork</dt>
+							<dt className='font-bold mt-6'>★★<br />Shopify / STUDIO / BASE / Google Search Console / Google Analytics / Chatwork</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.tool_dd_mid}</dd>
-							<dt className='font-bold mt-6'>★<br/>micro CMS</dt>
+							<dt className='font-bold mt-6'>★<br />micro CMS</dt>
 							<dd className='block text-xs leading-[1.6] mt-2 lg:whitespace-pre-wrap'>{dict.tool_dd_low}</dd>
 						</dl>
 					</section>
