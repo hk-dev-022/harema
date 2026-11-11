@@ -6,7 +6,7 @@ export default async function WorksPage() {
   const worksData = await client.get({
     endpoint: "works",
     customRequestInit: {
-      next: {revalidate: false},
+      next: {revalidate: 60},
     },
     queries: {
       limit: 100,
