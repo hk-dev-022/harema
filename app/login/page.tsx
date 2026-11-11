@@ -29,7 +29,7 @@ export default function LoginPage() {
 
 	return (
 		<Container className="min-h-[calc(100vh-250px)] flex flex-col items-center justify-center lg:min-h-[calc(100vh-400px)]">
-			<div className="w-full max-w-xs bg-white rounded-xl shadow-sm">
+			<div className="w-full max-w-xs bg-background rounded-xl shadow-sm">
 				<h1 className="text-lg font-bold text-center mb-6">Login</h1>
 				
 				<form onSubmit={handleLogin} className="space-y-4">
@@ -42,7 +42,7 @@ export default function LoginPage() {
 							type="text"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
-							className="w-full text-sm bg-[#F2F2F2] px-4 py-2.5 focus:outline-none focus:border-black transition"
+							className="w-full text-sm bg-[#E8ECE2] px-4 py-2.5 focus:outline-none focus:border-black placeholder:text-[#CB8F74]"
 							placeholder="Enter username"
 							required
 						/>
@@ -58,7 +58,7 @@ export default function LoginPage() {
 								type={showPassword ? "text" : "password"}
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
-								className="w-full text-sm bg-[#F2F2F2] pl-4 pr-14 py-2.5 focus:outline-none focus:border-black transition"
+								className="w-full text-sm bg-[#E8ECE2] pl-4 pr-14 py-2.5 focus:outline-none focus:border-black placeholder:text-[#CB8F74]"
 								placeholder="Enter password"
 								required
 							/>
@@ -79,7 +79,7 @@ export default function LoginPage() {
 	
 					<button
 						type="submit"
-						className="w-full bg-black text-white text-xs font-bold py-4 !mt-10 hover:opacity-60"
+						className="w-full bg-primary text-white text-xs font-bold py-4 !mt-10 hover:opacity-60"
 					>
 						Login
 					</button>

@@ -21,6 +21,7 @@ module.exports = {
         gray: 'var(--color-gray)',
         black: 'var(--color-black)',
         background: 'var(--color-background)',
+        primary: 'var(--color-primary)',
       }
     },
   },
