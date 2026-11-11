@@ -11,6 +11,7 @@ import { SecInner } from "@/components/ui/Container";
 type Props = {
 	work: any;
 	isEn?: boolean;
+	isPreview?: boolean;
 };
 
 const parseOptions: HTMLReactParserOptions = {
@@ -32,7 +33,11 @@ const parseOptions: HTMLReactParserOptions = {
 	}
 }
 
-export default function WorkDetail({ work, isEn = false }: Props) {
+export default function WorkDetail({
+	work,
+	isEn = false,
+	isPreview = false,
+}: Props) {
 	const roles: string[] = Array.isArray(work.role)
 		? work.role.filter((r: any): r is string => typeof r === "string")
 		: [];
@@ -45,7 +50,7 @@ export default function WorkDetail({ work, isEn = false }: Props) {
 		<article className="pb-[72px]">
 			<div className="md:flex md:justify-between">
 				<div className="md:max-w-[348px] md:mr-10 md:relative">
-					<div className="md:sticky md:top-[120px] xl:top-[150px]">
+					<div className="md:sticky md:top-[80px]">
 						<Container className="">
 							{/* HEAD */}
 							<div 
@@ -84,24 +89,53 @@ export default function WorkDetail({ work, isEn = false }: Props) {
 							) : null}
 
 							{/* URL */}
-							{ work.domain ? (
-								<SecInner size="sm">
+							{ work.domain || work.url_github ? (
+								<SecInner size="sm" className="flex flex-col items-start max-w-[75px] sm:max-w-full">
 									<Heading as="h2">URL</Heading>
-									<Link 
-										href={work.url} 
-										target="_blank" 
-										rel="noopener noreferrer"
-										className="max-w-[75px] ml-4 sm:max-w-full"
-									>
-										<span className="flex items-center">
-											<span className="text-xs text-right underline break-all mr-[2px]">{work.domain}</span>
-											<span className="shrink-0 block w-[11px]">
-												<img src="/svg/icon_arrow.svg" alt="arrow" />
-											</span>
-										</span>
-									</Link>
+
+									{/* SITE URL */}
+									{ work.domain ? (
+										<div>
+											<Link 
+												href={work.url} 
+												target="_blank" 
+												rel="noopener noreferrer"
+												className="inline-block"
+											>
+												<span className="flex items-center">
+													<span className="text-xs text-right underline break-all mr-[2px]">{work.domain}</span>
+													<span className="shrink-0 block w-[11px]">
+														<img src="/svg/icon_arrow.svg" alt="arrow" />
+													</span>
+												</span>
+											</Link>
+										</div>
+									) : null}
+
+									{/* GITHUB URL */}
+									{ work.url_github ? (
+										<div>
+											<Link
+												href={work.url_github}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="inline-block"
+											>
+												<span className="flex items-center">
+													<span className="text-xs text-right underline break-all mr-[2px]">
+														GitHub
+													</span>
+													<span className="shrink-0 block w-[11px]">
+														<img src="/svg/icon_arrow.svg" alt="arrow" />
+													</span>
+												</span>
+											</Link>
+										</div>
+									) : null}
 								</SecInner>
 							) : null }
+
+							
 
 							{/* SKILLS / TOOLS */}
 							{work.skills.length > 0 ? (
@@ -124,23 +158,25 @@ export default function WorkDetail({ work, isEn = false }: Props) {
 							) : null}
 
 							{/* BUTTON BACK */}
-							<div className="hidden md:block md:mt-10">
-								<Link
-									href="/"
-									className="underline"
-								>
-									Back
-								</Link>
-							</div>
+							{!isPreview && (
+								<div className="hidden md:block md:mt-10">
+									<Link
+										href="/"
+										className="underline"
+									>
+										Back
+									</Link>
+								</div>
+							)}
 						</Container>
 					</div>
 				</div>
 
-				<SecInner as="div" className="md:w-[60%] md:pt-0 md:mt-0">
+				<SecInner as="div" className="px-4 md:px-0 md:w-[60%] md:pt-0 md:mt-0">
 					<Container size="sm">
 						{/* THUMBNAIL */}
 						{work.thumbnail?.url ? (
-							<div className="aspect-[3/2] w-full border-[4px] border-[#000] rounded-[2px] relative sm:border-[8px] sm:rounded-[6px]">
+							<div className="aspect-[3/2] w-full rounded-[6px] overflow-hidden relative">
 								<Image
 									src={work.thumbnail.url}
 									alt={work.title}
@@ -157,17 +193,19 @@ export default function WorkDetail({ work, isEn = false }: Props) {
 						) : null}
 		
 						{/* BUTTON BACK */}
-						<SecInner
-							as="div"
-							className="text-center md:hidden"
-						>
-							<Link
-								href="/"
-								className="underline"
+						{!isPreview && (
+							<SecInner
+								as="div"
+								className="text-center md:hidden"
 							>
-								Back
-							</Link>
-						</SecInner>
+								<Link
+									href="/"
+									className="underline"
+								>
+									Back
+								</Link>
+							</SecInner>
+						)}
 					</Container>
 				</SecInner>
 			</div>

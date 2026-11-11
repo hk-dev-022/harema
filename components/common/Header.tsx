@@ -20,7 +20,7 @@ export default function Header() {
 	}
 
 	return (
-		<header className='w-full bg-white pt-12 fixed top-0 left-0 z-10'>
+		<header className='w-full pt-4 fixed top-0 left-0 z-10'>
 			<Container>
 				<div className='flex justify-between'>
 					<h1 className='text-[0.9375rem]'>

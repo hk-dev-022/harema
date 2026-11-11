@@ -1,7 +1,8 @@
+import { Metadata } from "next";
 import ProfileContent from "@/components/features/profile/ProfileContent";
 import jaDict from '@/app/i18n/dictionaries/ja.json';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Profile｜harema',
 	description: 'This is the profile page.',
 };

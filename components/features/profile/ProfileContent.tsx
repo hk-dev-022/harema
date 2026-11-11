@@ -38,7 +38,7 @@ export default function ProfileContent({ dict, isEn = false }: Props) {
 						<h2 className='flex flex-col leading-[1.6] mt-4'>
 							<span className='text-base'>川﨑&nbsp;陽香</span>
 							<span className='text-body-sm'>Haruka&nbsp;Kawasaki</span>
-							<span className='text-body-sm mt-2'>{dict.role}</span>
+							{/* <span className='text-body-sm mt-2'>{dict.role}</span> */}
 						</h2>
 						<p className={`whitespace-pre-wrap text-body-base mt-6 leading-[1.8] ${isEn ? 'text-left' : ''}`}>{dict.body}</p>
 					</div>

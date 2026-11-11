@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "../ui/Heading";
 import { Container } from "../ui/Container";
+import WorkDetail from "@/app/works/[id]/WorkDetail";
 
 type Props = {
 	works: any[];
@@ -12,92 +13,115 @@ type Props = {
 };
 
 export default function WorksList({ works, isEn = false }: Props) {
-	const [ViewMode, setViewMode] = useState<"gallery" | "list">("gallery");
-	const [activeRole, setActiveRole] = useState<string | null>(null);
+	const [viewMode, setViewMode] = useState<"detail" | "gallery" | "list">("detail");
+	const [activeType, setActiveType] = useState<string | null>(null);
 
 	const getRoleNames = (work: any): string[] => {
 		if (!work || !work.role || !Array.isArray(work.role)) {
 			return [];
 		}
-		return work.role.filter((r: any): r is string => typeof r === "string");
+	
+		return work.role.filter(
+			(r: any): r is string => typeof r === "string"
+		);
 	};
-
-	const ROLE_ORDER = [
-		"Development",
-		"Tech Direction",
-		"Design",
-	];
-
-	const rawUniqueRoles = Array.from (
+	
+	const uniqueTypes = Array.from(
 		new Set(
-			works.flatMap((work) => getRoleNames(work))
+			works.flatMap((work) =>
+				Array.isArray(work.type) ? work.type : []
+			)
 		)
 	);
 
-	const uniqueRoles = rawUniqueRoles.sort((a, b) => {
-		const indexA = ROLE_ORDER.indexOf(a);
-		const indexB = ROLE_ORDER.indexOf(b);
-		const finalIndexA = indexA === -1 ? 999: indexA;
-		const finalIndexB = indexB === -1 ? 999: indexB;
-
-		return finalIndexA - finalIndexB;
-	})
-
-	const filteredWorks = activeRole
-		? works.filter((work) => getRoleNames(work).includes(activeRole))
+	const filteredWorks = activeType
+		? works.filter((work) =>
+				Array.isArray(work.type) && work.type.includes(activeType)
+			)
 		: works;
 
 	return (
 		<div>
 			<Container>
 				{/* DISPLAY SWITCH */}
-				<div className="w-[74px] flex items-center bg-gray rounded-full p-[3px] mx-auto relative">
-					<div className={`absolute top-[3px] left-[3px] w-[34px] h-[34px] bg-white rounded-full shadow-sm transition-transform duration-200 ease-out pointer-events-none ${ViewMode === "list" ? "translate-x-[34px]" : "translate-x-0"}`}></div>
+				<div className="w-[108px] flex items-center bg-[#BBC5AA] rounded-full p-[3px] mx-auto relative">
+					{/* SLIDER */}
+					<div
+						className={`absolute top-[3px] left-[3px] w-[34px] h-[34px] bg-[#FBFFF5] rounded-full shadow-sm transition-transform duration-200 ease-out pointer-events-none ${
+							viewMode === "detail"
+							? "translate-x-0"
+							: viewMode === "gallery"
+								? "translate-x-[34px]"
+								: "translate-x-[68px]"
+						}`}
+					/>
+
+					{/* DETAIL */}
+					<button
+						onClick={() => setViewMode("detail")}
+						aria-label="詳細表示"
+						aria-pressed={viewMode === "detail"}
+						className="flex items-center justify-center w-[34px] h-[34px] rounded-full p-1 relative z-10"
+					>
+						<Image
+							src="/svg/icon_detail.svg"
+							alt="詳細アイコン"
+							width={10}
+							height={10}
+							className={viewMode === "detail" ? "opacity-100" : "opacity-50"}
+						/>
+					</button>
+
+					{/* GALLERY */}
 					<button
 						onClick={() => setViewMode("gallery")}
 						aria-label="ギャラリー表示"
-						className="flex items-center justify-center w-[34px] h-[34px] rounded-full p-1 relative z-9"
+						aria-pressed={viewMode === "gallery"}
+						className="flex items-center justify-center w-[34px] h-[34px] rounded-full p-1 relative z-10"
 					>
-						<Image 
+						<Image
 							src="/svg/icon_gallery.svg"
 							alt="ギャラリーアイコン"
 							width={12}
 							height={12}
-							className={`${ViewMode === "gallery" ? "opacity-100" : "opacity-50"}`}
+							className={viewMode === "gallery" ? "opacity-100" : "opacity-50"}
 						/>
 					</button>
+
+					{/* LIST */}
 					<button
 						onClick={() => setViewMode("list")}
 						aria-label="リスト表示"
-						className="flex items-center justify-center w-[34px] h-[34px] rounded-full p-1 relative z-9"
+						aria-pressed={viewMode === "list"}
+						className="flex items-center justify-center w-[34px] h-[34px] rounded-full p-1 relative z-10"
 					>
-						<Image 
+						<Image
 							src="/svg/icon_list.svg"
 							alt="リストアイコン"
 							width={12}
 							height={12}
-							className={`${ViewMode === "list" ? "opacity-100" : "opacity-50"}`}
+							className={viewMode === "list" ? "opacity-100" : "opacity-50"}
 						/>
 					</button>
 				</div>
 
-				{/* ROLE */}
+				{/* TYPE NAVIGATION */}
 				<nav className="leading-[1.2] mt-8">
 					<ul className="flex items-center justify-center">
 						<li>
-							{ activeRole === null ? (
+							{ activeType === null ? (
 								<span className="opacity-30 pointer-events-none">All</span>
 							) : (
 								<button
-									onClick={() => setActiveRole(null)}
+									onClick={() => setActiveType(null)}
 									className="hover:opacity-60"
 								>
 									All
 								</button>
 							)}
 						</li>
-						{ uniqueRoles.map((roleName: string) => {
-							const isSelected = activeRole === roleName;
+						{ uniqueTypes.map((roleName: string) => {
+							const isSelected = activeType === roleName;
 
 							return (
 								<div
@@ -114,7 +138,7 @@ export default function WorksList({ works, isEn = false }: Props) {
 											</span>
 										) : (
 											<button
-												onClick={() => setActiveRole(roleName)}
+												onClick={() => setActiveType(roleName)}
 												className="hover:opacity-60"
 											>
 												{ roleName }
@@ -130,9 +154,11 @@ export default function WorksList({ works, isEn = false }: Props) {
 
 			<div
 				className={`mt-7 sm:mt-[72px] ${
-					ViewMode === "gallery"
-					? "grid grid-cols-2 gap-[2px] px-[2px] sm:grid-cols-4"
-					: "max-w-[480px] flex flex-col gap-4 px-[16px] sm:max-w-[500px] sm:gap-5 md:px-[24px]"
+					viewMode === "gallery"
+						? "grid grid-cols-2 gap-[2px] px-[2px] sm:grid-cols-4"
+						: viewMode === "list"
+							? "max-w-[480px] flex flex-col gap-4 px-[16px] sm:max-w-[500px] sm:gap-5 md:px-[24px]"
+							: "flex flex-col gap-16 md:gap-24"
 				}`}
 			>
 				{ filteredWorks.map((work) => {
@@ -140,7 +166,21 @@ export default function WorksList({ works, isEn = false }: Props) {
 					const displayTitle = (isEn && work.title_en) ? work.title_en : work.title;
 					const detailUrl = isEn ? `/en/works/${work.id}` : `/works/${work.id}`;
 
-					if (ViewMode === "gallery") {
+					if (viewMode === "detail") {
+						// DETAIL VIEW
+						return (
+							<div
+								key={work.id}
+								className="border-b border-text/10 md:pb-4 md:pb-3"
+							>
+								<WorkDetail
+									work={work}
+									isEn={isEn}
+									isPreview
+								/>
+							</div>
+						);
+					} else if (viewMode === "gallery") {
 						// GALLERY VIEW
 						return (
 							<Link 

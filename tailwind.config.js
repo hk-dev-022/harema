@@ -20,6 +20,7 @@ module.exports = {
       colors: {
         gray: 'var(--color-gray)',
         black: 'var(--color-black)',
+        background: 'var(--color-background)',
       }
     },
   },

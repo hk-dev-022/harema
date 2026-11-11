@@ -5,6 +5,17 @@
 :root {
   --color-gray: #EEEEEE;
   --color-black: #1E1E1E;
+  --color-primary: #d84400;
+  --color-background: #d3dbc6;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
