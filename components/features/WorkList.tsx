@@ -107,7 +107,7 @@ export default function WorksList({ works, isEn = false }: Props) {
 
 				{/* TYPE NAVIGATION */}
 				<nav className="leading-[1.2] mt-8">
-					<ul className="flex items-center justify-center">
+					<ul className="flex items-center justify-center flex-wrap gap-y-1">
 						<li>
 							{ activeType === null ? (
 								<span className="opacity-30 pointer-events-none">All</span>
