@@ -230,15 +230,15 @@ export default function WorksList({ works, isEn = false }: Props) {
 										<p>{currentRoles.join(",")}</p>
 									</div>
 								</Link>
-								{ work.domain ? (
+								{ work.domain || work.url_github ? (
 									<Link 
-										href={work.url} 
-										target="_blank" 
+										href={ work.domain ? work.url : work.url_github}
+										target="_blank"
 										rel="noopener noreferrer"
 										className="leading-[1.1] ml-4 sm:max-w-full"
 									>
 										<span className="flex items-center justify-end">
-											<span className="text-[0.6875rem] text-right underline break-words mr-[2px] sm:text-xs">{work.domain}</span>
+											<span className="text-[0.6875rem] text-right underline break-words mr-[2px] sm:text-xs">{ work.domain ? work.domain : "GitHub"}</span>
 											<span className="shrink-0 block w-[11px]">
 												<img src="/svg/icon_arrow.svg" alt="arrow" />
 											</span>
